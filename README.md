@@ -2,14 +2,14 @@
 ***
 
 
-![SchemaDiagram](https://github.com/eggOnion/Library-Booking-System/blob/main/Schema%20Diagram.png?raw=true)
+![Schema_Diagram](https://github.com/eggOnion/Library-Booking-System/blob/main/Schema%20Diagram.png?raw=true)
 
 
 ### Books Table
 
-1. availability is based on quantity. Eg; if (quantity == 0) then availability = FALSE
+1. `availability` is based on the `quantity`. Eg; if (quantity == 0) then availability = FALSE
 
-2. the quantity count will be compute over at `loan_period` table
+2. the `quantity` count will be compute over at `loan_period` table
 
 ***
 
@@ -30,12 +30,12 @@
 
 ## LoanPeriod Table
 
-1. starttime to endtime can be fixed. Eg; 7 days. The **data type** should be `LocalDate`
+1. `starttime` to `endtime` can be fixed. Eg; 21 days. The **data type** should be `LocalDate`
 
-2.  It will compute the quantity count for the `books` table based on it's `loan_status`.
+2.  To compute the `quantity` count for the `books` table based on it's `loan_status`.
     * Examples; 
-        * if the book is on `.BORROWED` or `OVERDUE` then  quantity=quantity-1
-        * if the book is on `.RETURNED` then  quantity=quantity+1
+        * if the book is on `.BORROWED` or `.OVERDUE` then **quantity=quantity-1**
+        * if the book is on `.RETURNED` then  **quantity=quantity+1**
             
 3. If book has passed the enddate but not yet returned, then the `loan_status` should change to `OVERDUE` automatically.
 
