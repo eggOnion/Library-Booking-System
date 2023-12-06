@@ -2,6 +2,9 @@
 ***
 
 
+![SchemaDiagram](https://github.com/eggOnion/Library-Booking-System/blob/main/Schema%20Diagram.png?raw=true)
+
+
 ### Books Table
 
 1. availability is based on quantity. Eg; if (quantity == 0) then availability = FALSE
