@@ -1,0 +1,38 @@
+package com.example.librarybookingsystem.serviceimpls;
+
+import org.springframework.stereotype.Component;
+
+import com.example.librarybookingsystem.Book;
+import com.example.librarybookingsystem.BookRepository;
+import com.example.librarybookingsystem.entities.User;
+import com.example.librarybookingsystem.repositories.UserRepository;
+
+import jakarta.annotation.PostConstruct;
+
+@Component
+public class DataLoader {
+
+    private BookRepository bookRepository;
+    private LearnerRepository learnerRepository;
+
+    public DataLoader(BookRepository bookRepository, LearnerRepository learnerRepository) {
+        this.bookRepository = bookRepository;
+        this.learnerRepository = learnerRepository;
+    }
+
+    @PostConstruct
+    public void loadData() {
+        bookRepository.deleteAll();
+        learnerRepository.deleteAll();
+
+        bookRepository.save(new Book("The Fellowship of the Ring", "J. R. R. Tolkien", "Fantasy", 2, true));
+        bookRepository.save(new Book("Thinking, Fast and Slow", "Daniel Kahneman", "Self Improvement", 2, true));
+        bookRepository.save(new Book("True Singapore Ghost Stories", "Russell Lee", "Horror", 1, true));
+    
+        learnerRepository.save(new User("John", "Wick", "johnwick@continental.com"));
+        learnerRepository.save(new User("Winston", "Scott", "winstonscott@continental.com"));
+        learnerRepository.save(new User("Viggo", "Tarasov", "viggotarasov@continental.com"));
+    
+    }
+    
+}
