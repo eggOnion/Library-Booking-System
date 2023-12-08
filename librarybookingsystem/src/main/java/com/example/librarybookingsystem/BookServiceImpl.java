@@ -7,7 +7,7 @@ import org.springframework.stereotype.Service;
 
 @Service
 public class BookServiceImpl implements BookService {
-    
+
     private BookRepository bookRepository;
 
     public BookServiceImpl(BookRepository bookRepository) {
@@ -44,7 +44,13 @@ public class BookServiceImpl implements BookService {
         bookToUpdate.setAuthor(book.getAuthor());
         bookToUpdate.setGenre(book.getGenre());
         bookToUpdate.setQuantity(book.getQuantity());
-        bookToUpdate.setAvailability(book.isAvailability());
+
+        if (bookToUpdate.getQuantity() == 0) {
+            bookToUpdate.setAvailability(false);
+        } else {
+            bookToUpdate.setAvailability(true);
+        }
+
         return bookRepository.save(bookToUpdate);
     }
 
@@ -52,6 +58,5 @@ public class BookServiceImpl implements BookService {
     public void deleteBook(int id) {
         bookRepository.deleteById(id);
     }
-
 
 }
