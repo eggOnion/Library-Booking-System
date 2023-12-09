@@ -20,9 +20,9 @@ public class LearnerDataLoader {
     public void loadData() {
         learnerRepository.deleteAll();
 
-        learnerRepository.save(new Learner("John", "Wick", "johnwick@continental.com"));
-        learnerRepository.save(new Learner("Winston", "Scott", "winstonscott@continental.com"));
-        learnerRepository.save(new Learner("Viggo", "Tarasov", "viggotarasov@continental.com"));
+        learnerRepository.save(new Learner("John", "Wick", "johnwick@continental.com", "99102134"));
+        learnerRepository.save(new Learner("Winston", "Scott", "winstonscott@continental.com", "99102134"));
+        learnerRepository.save(new Learner("Viggo", "Tarasov", "viggotarasov@continental.com", "99102134"));
     }
     
 }
