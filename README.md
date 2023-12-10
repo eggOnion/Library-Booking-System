@@ -38,14 +38,14 @@ A learner can borrow different books on multiple times or different days, thus t
 
 ### loan_period Table
 
-**What is the min `book` that a `loan_period` can have? **
+**What is the min `book` that a `loan_period` can have?**
 ```
 Ans: 1
 
 In order for a loan_period to exist, it must have a minimum of 1 book borrowed.
 ```
 
-**What is the max `book` that a `loan_period` can have? **
+**What is the max `book` that a `loan_period` can have?**
 ```
 Ans: Many
 
@@ -68,7 +68,9 @@ Ans: Many
 A book is available for borrowed, and it is so popular that many learner wants to borrow it.
 ```
 
+End of Cardinalities description
 
+###
 
 
 ### Book Table
