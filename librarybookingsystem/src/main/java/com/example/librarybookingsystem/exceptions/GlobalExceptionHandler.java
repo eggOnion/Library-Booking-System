@@ -10,27 +10,17 @@ import org.springframework.validation.ObjectError;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
-import com.example.librarybookingsystem.BookNotFoundException;
 import com.example.librarybookingsystem.entities.ErrorResponse;
 
 @ControllerAdvice
 public class GlobalExceptionHandler {
 
     // this is handler for LearnerNotFoundException
-    @ExceptionHandler({ LearnerNotFoundException.class, BookNotFoundException.class })
+    @ExceptionHandler({ LearnerNotFoundException.class })
     public ResponseEntity<ErrorResponse> handleResourceNotFoundException(LearnerNotFoundException ex) {
         ErrorResponse errorResponse = new ErrorResponse(ex.getMessage(), LocalDateTime.now());    
         return new ResponseEntity<>(errorResponse, HttpStatus.NOT_FOUND);
-    }
-
-    // [Activity 1 - Refactor]
-    // @ExceptionHandler(InteractionNotFoundException.class)
-    // public ResponseEntity<ErrorResponse>
-    // handleInteractionNotFoundException(CustomerNotFoundException ex){
-    // ErrorResponse errorResponse = new ErrorResponse(ex.getMessage(),
-    // LocalDateTime.now());
-    // return new ResponseEntity<>(errorResponse, HttpStatus.NOT_FOUND);
-    // }
+    } 
 
     @ExceptionHandler(EmptyResultDataAccessException.class)
     public ResponseEntity<ErrorResponse> handleEmptyResultDataAccessException(EmptyResultDataAccessException ex) {
