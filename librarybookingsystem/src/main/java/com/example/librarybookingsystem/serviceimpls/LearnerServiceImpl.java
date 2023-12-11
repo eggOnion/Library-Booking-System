@@ -45,6 +45,7 @@ public class LearnerServiceImpl implements LearnerService {
         learnerToUpdate.setFirstName(learner.getFirstName());
         learnerToUpdate.setLastName(learner.getLastName());
         learnerToUpdate.setEmail(learner.getEmail());
+        learnerToUpdate.setContact_num(learner.getContact_num());
         return learnerRepository.save(learnerToUpdate);    
     }
 
