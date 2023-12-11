@@ -53,7 +53,7 @@ public class LearnerController {
     }
 
     @PutMapping(path = {"/{id}","/{id}/"})
-    public ResponseEntity<Learner> updateUser(@PathVariable int id, @RequestBody Learner user) {
+    public ResponseEntity<Learner> updateUser(@PathVariable int id, @Valid @RequestBody Learner user) {
         Learner updateLearner = learnerService.updateLearner(id, user);
         return new ResponseEntity<>(updateLearner, HttpStatus.OK);
     }
