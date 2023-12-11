@@ -41,7 +41,7 @@ public class LearnerController {
     }
 
     @GetMapping(path = {"/{id}","/{id}/"})
-    public ResponseEntity<Learner> getUser(@PathVariable int id) {
+    public ResponseEntity<Learner> getUser(@PathVariable String id) {
         Learner findUser = learnerService.getLearner(id);
         return new ResponseEntity<>(findUser, HttpStatus.OK);
     }
@@ -53,13 +53,13 @@ public class LearnerController {
     }
 
     @PutMapping(path = {"/{id}","/{id}/"})
-    public ResponseEntity<Learner> updateUser(@PathVariable int id, @Valid @RequestBody Learner user) {
+    public ResponseEntity<Learner> updateUser(@PathVariable String id, @Valid @RequestBody Learner user) {
         Learner updateLearner = learnerService.updateLearner(id, user);
         return new ResponseEntity<>(updateLearner, HttpStatus.OK);
     }
 
     @DeleteMapping(path = {"/{id}","/{id}/"})
-    public ResponseEntity<Learner> deleteLearner(@PathVariable int id) {
+    public ResponseEntity<Learner> deleteLearner(@PathVariable String id) {
         learnerService.deleteLearner(id);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }

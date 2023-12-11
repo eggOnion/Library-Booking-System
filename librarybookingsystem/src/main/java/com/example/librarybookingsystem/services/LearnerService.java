@@ -10,13 +10,13 @@ public interface LearnerService {
     
     Learner createLearner(Learner learner);
 
-    Learner getLearner(int id);
+    Learner getLearner(String id);
 
     ArrayList<Learner> getAllLearners();
 
-    Learner updateLearner(int id, Learner learner);
+    Learner updateLearner(String id, Learner learner);
 
-    void deleteLearner(int id);
+    void deleteLearner(String id);
 
     ArrayList<Learner> searchLearner(String email);       //switch to search by username later
     

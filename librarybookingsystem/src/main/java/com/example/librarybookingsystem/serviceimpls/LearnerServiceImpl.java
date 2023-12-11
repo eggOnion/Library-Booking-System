@@ -28,7 +28,7 @@ public class LearnerServiceImpl implements LearnerService {
     }
 
     @Override
-    public Learner getLearner(int id) {
+    public Learner getLearner(String id) {
         return learnerRepository.findById(id).orElseThrow(() -> new LearnerNotFoundException(id));
     }
 
@@ -39,7 +39,7 @@ public class LearnerServiceImpl implements LearnerService {
     }
 
     @Override
-    public Learner updateLearner(int id, Learner learner) {
+    public Learner updateLearner(String id, Learner learner) {
 
         Learner learnerToUpdate = learnerRepository.findById(id).get();
         learnerToUpdate.setFirstName(learner.getFirstName());
@@ -50,7 +50,7 @@ public class LearnerServiceImpl implements LearnerService {
     }
 
     @Override
-    public void deleteLearner(int id) {
+    public void deleteLearner(String id) {
         learnerRepository.deleteById(id);
     }
 
