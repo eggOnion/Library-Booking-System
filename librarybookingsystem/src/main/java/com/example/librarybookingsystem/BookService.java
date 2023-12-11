@@ -6,13 +6,13 @@ public interface BookService {
 
    Book createBook(Book book);
 
-   Book getBook(int id);
+   Book getBook(String id);
 
    ArrayList<Book> getAllBooks();
 
-   Book updateBook(int id, Book book);
+   Book updateBook(String id, Book book);
 
-   void deleteBook(int id);
+   void deleteBook(String id);
 
    ArrayList<Book> searchBooks(String title);
 }

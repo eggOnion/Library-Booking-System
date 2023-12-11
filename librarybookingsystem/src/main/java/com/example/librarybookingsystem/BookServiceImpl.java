@@ -33,12 +33,12 @@ public class BookServiceImpl implements BookService {
     }
 
     @Override
-    public Book getBook(int id) {
+    public Book getBook(String id) {
         return bookRepository.findById(id).orElseThrow(() -> new BookNotFoundException(id));
     }
 
     @Override
-    public Book updateBook(int id, Book book) {
+    public Book updateBook(String id, Book book) {
         Book bookToUpdate = bookRepository.findById(id).get();
         bookToUpdate.setTitle(book.getTitle());
         bookToUpdate.setAuthor(book.getAuthor());
@@ -55,7 +55,7 @@ public class BookServiceImpl implements BookService {
     }
 
     @Override
-    public void deleteBook(int id) {
+    public void deleteBook(String id) {
         bookRepository.deleteById(id);
     }
 

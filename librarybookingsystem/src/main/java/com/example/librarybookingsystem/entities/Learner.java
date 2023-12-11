@@ -1,6 +1,7 @@
 package com.example.librarybookingsystem.entities;
 
 import org.springframework.security.core.userdetails.UserDetails;
+import java.util.UUID; //added this import for UUID
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -27,9 +28,12 @@ import lombok.Setter;
 public class Learner {
     
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+
+    // @GeneratedValue(strategy = GenerationType.IDENTITY)
+    // dont use generatedvalue because using random UUID
+
     @Column(name = "id")
-    private int id;
+    private String id;
 
     // @NotBlank(message = "Username is mandatory")
     // @Column(name = "username")
@@ -56,8 +60,9 @@ public class Learner {
     @Size(min=8, max=8, message = "contact number must have 8 digits")
     private String contact_num;
 
+    //parameterless constructor - Default Constructor
     public Learner() {
-        //parameterless constructor - Default Constructor
+                this.id = UUID.randomUUID().toString(); //id will be randomUUID
     }
 
     public Learner(String firstName, String lastName, String email, String contact_num){

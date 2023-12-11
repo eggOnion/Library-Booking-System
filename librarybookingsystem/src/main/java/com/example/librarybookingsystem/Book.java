@@ -1,4 +1,5 @@
 package com.example.librarybookingsystem;
+import java.util.UUID; //added this import for UUID
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -25,9 +26,12 @@ import lombok.Setter;
 public class Book {
     
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+
+    // @GeneratedValue(strategy = GenerationType.IDENTITY)
+    // dont use generatedvalue because using random UUID
+
     @Column(name = "id")
-    private int id;
+    private String id; //change from int to String
 
     @NotBlank(message = "Title is mandatory")
     @Column(name = "title")
@@ -50,8 +54,10 @@ public class Book {
     private boolean availability;
 
     public Book() {
-
+        this.id = UUID.randomUUID().toString(); //id will be randomUUID
     }
+
+  
 
     public Book(String title, String author, String genre, int quantity, boolean availability) {
         this();

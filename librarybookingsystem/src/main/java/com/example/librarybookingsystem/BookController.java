@@ -39,19 +39,19 @@ public class BookController {
     }
 
     @GetMapping("{id}")
-    public ResponseEntity<Book> getBook(@PathVariable int id) {
+    public ResponseEntity<Book> getBook(@PathVariable String id) { //change from int to String
         Book findBook = bookService.getBook(id);
         return new ResponseEntity<>(findBook, HttpStatus.OK);
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<Book> updateBook(@PathVariable int id, @RequestBody Book book) {
+    public ResponseEntity<Book> updateBook(@PathVariable String id, @RequestBody Book book) {
         Book updateBook = bookService.updateBook(id, book);
         return new ResponseEntity<>(updateBook, HttpStatus.OK);
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<Book> deleteBook(@PathVariable int id) {
+    public ResponseEntity<Book> deleteBook(@PathVariable String id) {
         bookService.deleteBook(id);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }    
