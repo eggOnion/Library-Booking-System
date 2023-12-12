@@ -23,7 +23,7 @@ public class LoanPeriodDataLoader {
         loanRepository.deleteAll();
 
         loanRepository.save(new LoanPeriod(1,1,LocalDate.parse("2023-12-01"),LocalDate.parse("2023-12-06"), "RETURNED"));
-        loanRepository.save(new LoanPeriod(2,2,LocalDate.parse("2023-12-02"),LocalDate.parse("2023-12-07"), "OVERDUE"));
+        loanRepository.save(new LoanPeriod(2,2,LocalDate.parse("2023-12-01"),LocalDate.parse("2023-12-07"), "OVERDUE"));
         loanRepository.save(new LoanPeriod(3,3,LocalDate.parse("2023-12-10"),LocalDate.parse("2023-12-17"), "BORROWED"));
     }
     
