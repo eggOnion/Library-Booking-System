@@ -1,6 +1,8 @@
-package com.example.librarybookingsystem;
+package com.example.librarybookingsystem.services;
 
 import java.util.ArrayList;
+
+import com.example.librarybookingsystem.entities.Book;
 
 public interface BookService {
 

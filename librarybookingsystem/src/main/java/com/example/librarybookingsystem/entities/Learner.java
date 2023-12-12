@@ -11,12 +11,13 @@ import jakarta.persistence.Table;
 import jakarta.validation.constraints.Digits;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
-
+//import java.util.UUID;
 
 @Builder
 @AllArgsConstructor
@@ -47,8 +48,8 @@ public class Learner {
     @Column(name = "last_name")
     private String lastName;
 
-    @Email(message = "email should be a valid email address")      //change to @Email later
-    @Column(name = "email", unique = true)
+    @Email(message = "email should be a valid email address")
+    @Column(name = "email", unique = true)   
     private String email;
 
     @Digits(fraction=0, integer = 9, message = "contact number cannot have alphabets")
@@ -57,8 +58,8 @@ public class Learner {
     private String contact_num;
 
     public Learner() {
-        //parameterless constructor - Default Constructor
-    }
+        //parameterless constructor - Default Constructor       
+    } 
 
     public Learner(String firstName, String lastName, String email, String contact_num){
         this();
@@ -68,3 +69,4 @@ public class Learner {
         this.contact_num = contact_num;
     }    
 }
+
