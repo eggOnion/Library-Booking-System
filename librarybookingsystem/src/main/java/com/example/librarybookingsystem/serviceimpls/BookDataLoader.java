@@ -1,7 +1,10 @@
-package com.example.librarybookingsystem;
+package com.example.librarybookingsystem.serviceimpls;
 
 import jakarta.annotation.PostConstruct;
 import org.springframework.stereotype.Component;
+
+import com.example.librarybookingsystem.entities.Book;
+import com.example.librarybookingsystem.repositories.BookRepository;
 
 @Component
 public class BookDataLoader {
