@@ -29,10 +29,12 @@ public class LoanPeriod {
     private int id;
 
     @JoinColumn(name = "user_id", referencedColumnName = "id")
-    private Learner learner;
+    // private Learner learner;
+    private int learner;
 
     @JoinColumn(name = "book_id", referencedColumnName = "id")
-    private Book book;
+    // private Book book;
+    private int book;
 
     @Column(name = "start_time")
     private LocalDate startTime;
@@ -42,5 +44,20 @@ public class LoanPeriod {
 
     @Column(name = "loan_status")
     private String loanStatus;   
+
+    public LoanPeriod() {
+
+    }
+
+    
+    // public LoanPeriod(Learner learner, Book book, LocalDate startTime, LocalDate endTime, String loanStatus ) {
+    public LoanPeriod(int learner, int book, LocalDate startTime, LocalDate endTime, String loanStatus ) {     
+        this();
+        this.learner = learner ;
+        this.book = book;
+        this.startTime = startTime;
+        this.endTime = endTime;
+        this.loanStatus = loanStatus;
+    }
 
 }
