@@ -70,6 +70,7 @@ public class LoanPeriodController {
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 
+    // Loan Book
     @PostMapping("/{learner_id}/{book_id}")
     public ResponseEntity<LoanPeriod> createLoanPeriod(@PathVariable int learner_id, @PathVariable int book_id) {
         Learner learner = learnerService.getLearner(learner_id);
@@ -85,7 +86,7 @@ public class LoanPeriodController {
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
         }
 
-        LoanPeriod loanPeriod = new LoanPeriod(learner, book, LocalDate.now(), LocalDate.now().plusDays(-1), "BORROWED");
+        LoanPeriod loanPeriod = new LoanPeriod(learner, book, LocalDate.now(), LocalDate.now().plusDays(7), "BORROWED");
 
         loanPeriodService.createLoanPeriod(loanPeriod);
         bookService.updateBook(book_id, book);
@@ -93,6 +94,7 @@ public class LoanPeriodController {
         return new ResponseEntity<>(loanPeriod, HttpStatus.CREATED);
     }
 
+    // Return Book
     @PutMapping("/return/{id}")
     public ResponseEntity<LoanPeriod> returnBook(@PathVariable int id) {
         LoanPeriod loanPeriod = loanPeriodService.getLoanPeriod(id);
