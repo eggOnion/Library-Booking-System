@@ -3,6 +3,7 @@ package com.example.librarybookingsystem.serviceimpls;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.example.librarybookingsystem.entities.Learner;
@@ -16,6 +17,7 @@ public class LearnerServiceImpl implements LearnerService {
 
     private LearnerRepository learnerRepository;    
 
+    @Autowired
     public LearnerServiceImpl(LearnerRepository learnerRepository) {
         this.learnerRepository = learnerRepository;
     }

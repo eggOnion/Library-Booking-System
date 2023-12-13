@@ -22,5 +22,3 @@ public interface LearnerService {
     ArrayList<Learner> searchLearner(String email); 
 }
 
-    
-

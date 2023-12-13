@@ -1,12 +1,16 @@
 package com.example.librarybookingsystem.entities;
 
+import java.util.List;
+
 import org.springframework.security.core.userdetails.UserDetails;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import jakarta.validation.constraints.Digits;
 import jakarta.validation.constraints.Email;
@@ -56,6 +60,10 @@ public class Learner {
     @Column(name = "contact_num", nullable = false)
     @Size(min=8, max=8, message = "contact number must have 8 digits")
     private String contact_num;
+
+    @OneToMany(mappedBy = "learner", cascade = CascadeType.ALL)
+    private List<LoanPeriod> LoanPeriod;
+
 
     public Learner() {
         //parameterless constructor - Default Constructor       

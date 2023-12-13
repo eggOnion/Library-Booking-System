@@ -56,8 +56,6 @@ public class LoanPeriodServiceImpl implements LoanPeriodService {
         loanPeriodRepository.deleteById(id);
     }
 
-
-
     @Override
     public ArrayList<LoanPeriod> searchLoanStatus(String loanStatus) {
         List<LoanPeriod> findLoanPeriod = loanPeriodRepository.findByLoanStatus(loanStatus);

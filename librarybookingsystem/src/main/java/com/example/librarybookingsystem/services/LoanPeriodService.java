@@ -19,7 +19,4 @@ public interface LoanPeriodService {
 
     ArrayList<LoanPeriod> searchLoanStatus(String loanStatus);
 
-
-
-   
 }
