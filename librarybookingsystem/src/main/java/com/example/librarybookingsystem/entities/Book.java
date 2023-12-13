@@ -1,10 +1,14 @@
 package com.example.librarybookingsystem.entities;
 
+import java.util.List;
+
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import jakarta.validation.constraints.Max;
 import jakarta.validation.constraints.Min;
@@ -22,7 +26,6 @@ import lombok.Setter;
 @Setter
 @Entity
 @Table(name = "book")
-
 public class Book {
     
     @Id
@@ -50,6 +53,9 @@ public class Book {
 
     @Column(name = "availability")
     private boolean availability;
+
+    @OneToMany(mappedBy = "book", cascade = CascadeType.ALL)
+    private List<LoanPeriod> LoanPeriod;
 
     public Book() {
 

@@ -3,7 +3,9 @@ package com.example.librarybookingsystem.serviceimpls;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
 import com.example.librarybookingsystem.entities.Learner;
 import com.example.librarybookingsystem.exceptions.LearnerNotFoundException;
 import com.example.librarybookingsystem.repositories.LearnerRepository;
@@ -13,10 +15,9 @@ import com.example.librarybookingsystem.services.LearnerService;
 @Service
 public class LearnerServiceImpl implements LearnerService {
 
-    //This is the class for CRUD Operation?
+    private LearnerRepository learnerRepository;    
 
-    private LearnerRepository learnerRepository;
-
+    @Autowired
     public LearnerServiceImpl(LearnerRepository learnerRepository) {
         this.learnerRepository = learnerRepository;
     }
@@ -40,11 +41,12 @@ public class LearnerServiceImpl implements LearnerService {
 
     @Override
     public Learner updateLearner(int id, Learner learner) {
-
+  
         Learner learnerToUpdate = learnerRepository.findById(id).get();
-        learnerToUpdate.setFirstName(learner.getFirstName());
+        learnerToUpdate.setFirstName(learner.getFirstName());        
         learnerToUpdate.setLastName(learner.getLastName());
         learnerToUpdate.setEmail(learner.getEmail());
+        learnerToUpdate.setContact_num(learner.getContact_num());
         return learnerRepository.save(learnerToUpdate);    
     }
 
@@ -57,6 +59,7 @@ public class LearnerServiceImpl implements LearnerService {
     public ArrayList<Learner> searchLearner(String email) {
         List<Learner> findLearner = learnerRepository.findByEmail(email);
         return (ArrayList<Learner>) findLearner;        
-    } 
-    
+    }     
 }
+
+

@@ -2,12 +2,15 @@ package com.example.librarybookingsystem.entities;
 
 import java.time.LocalDate;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -22,16 +25,20 @@ import lombok.Setter;
 @Table(name = "loan_period")
 
 public class LoanPeriod {
-    
+
     @Id
-    @GeneratedValue(strategy =  GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
     private int id;
 
-    @JoinColumn(name = "user_id", referencedColumnName = "id")
+    @JsonBackReference
+    @ManyToOne(optional = false)
+    @JoinColumn(name = "learner_id", referencedColumnName = "id", nullable = false)
     private Learner learner;
 
-    @JoinColumn(name = "book_id", referencedColumnName = "id")
+    @JsonBackReference
+    @ManyToOne(optional = false)
+    @JoinColumn(name = "book_id", referencedColumnName = "id", nullable = false)
     private Book book;
 
     @Column(name = "start_time")
@@ -41,6 +48,19 @@ public class LoanPeriod {
     private LocalDate endTime;
 
     @Column(name = "loan_status")
-    private String loanStatus;   
+    private String loanStatus;
+
+    public LoanPeriod() {
+
+    }
+
+    public LoanPeriod(Learner learner, Book book, LocalDate startTime, LocalDate endTime, String loanStatus) {
+        this();
+        this.learner = learner;
+        this.book = book;
+        this.startTime = startTime;
+        this.endTime = endTime;
+        this.loanStatus = loanStatus;
+    }
 
 }

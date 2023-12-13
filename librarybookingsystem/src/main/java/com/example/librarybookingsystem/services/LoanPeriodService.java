@@ -15,4 +15,7 @@ public interface LoanPeriodService {
     LoanPeriod updateLoanPeriod(int id, LoanPeriod loanPeriod);
 
     void deleteLoanPeriod(int id);
+
+    ArrayList<LoanPeriod> searchLoanStatus(String loanStatus);
+
 }

@@ -15,6 +15,7 @@ public class BookServiceImpl implements BookService {
 
     private BookRepository bookRepository;
 
+
     public BookServiceImpl(BookRepository bookRepository) {
         this.bookRepository = bookRepository;
     }
@@ -58,6 +59,18 @@ public class BookServiceImpl implements BookService {
 
         return bookRepository.save(bookToUpdate);
     }
+
+    // @Override
+    // public Book borrowBook(int book_id, int learner_id) {
+    //     Book bookToBorrow = bookRepository.findById(book_id).get();
+    //     Learner learnerThatBorrow = learnerRepository.findById(learner_id).get();
+
+    //     if(bookToBorrow != null && learnerThatBorrow != null) {
+    //         loanPeriod.setLearner(learnerThatBorrow);
+    //         loanPeriod.setBook(bookToBorrow);
+    //     }
+    //     return null;
+    // }
 
     @Override
     public void deleteBook(int id) {
