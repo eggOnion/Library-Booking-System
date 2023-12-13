@@ -22,6 +22,7 @@ import com.example.librarybookingsystem.services.BookService;
 import com.example.librarybookingsystem.services.LearnerService;
 import com.example.librarybookingsystem.services.LoanPeriodService;
 
+import io.micrometer.core.ipc.http.HttpSender.Response;
 import jakarta.validation.Valid;
 
 @RestController
@@ -84,12 +85,39 @@ public class LoanPeriodController {
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
         }
 
-        LoanPeriod loanPeriod = new LoanPeriod(learner, book, LocalDate.now(), LocalDate.now().plusDays(7), "BORROWED");
+        LoanPeriod loanPeriod = new LoanPeriod(learner, book, LocalDate.now(), LocalDate.now().plusDays(-1), "BORROWED");
 
         loanPeriodService.createLoanPeriod(loanPeriod);
         bookService.updateBook(book_id, book);
 
         return new ResponseEntity<>(loanPeriod, HttpStatus.CREATED);
+    }
+
+    @PutMapping("/return/{id}")
+    public ResponseEntity<LoanPeriod> returnBook(@PathVariable int id) {
+        LoanPeriod loanPeriod = loanPeriodService.getLoanPeriod(id);
+
+        if (loanPeriod == null) {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+
+        if (LocalDate.now().isAfter(loanPeriod.getEndTime())) {
+            if (!loanPeriod.getLoanStatus().equals("RETURNED")) {
+                loanPeriod.setLoanStatus("OVERDUE");
+            }
+        } else if (loanPeriod.getLoanStatus().equals("BORROWED")) {
+            loanPeriod.setLoanStatus("RETURNED");
+        } else {
+            return new ResponseEntity<>(HttpStatus.CONFLICT);
+        }
+
+        Book book = loanPeriod.getBook();
+        book.setQuantity(book.getQuantity() + 1);
+
+        loanPeriodService.updateLoanPeriod(id, loanPeriod);
+        bookService.updateBook(book.getId(), book);
+
+        return new ResponseEntity<>(HttpStatus.ACCEPTED);
     }
 
     // @PostMapping(path={"/user_id/"})
