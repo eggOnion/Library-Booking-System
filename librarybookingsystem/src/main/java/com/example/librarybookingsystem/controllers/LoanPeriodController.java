@@ -23,7 +23,6 @@ import com.example.librarybookingsystem.services.LearnerService;
 import com.example.librarybookingsystem.services.LoanPeriodService;
 
 import io.micrometer.core.ipc.http.HttpSender.Response;
-
 import jakarta.validation.Valid;
 
 @RestController
@@ -86,7 +85,7 @@ public class LoanPeriodController {
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
         }
 
-        LoanPeriod loanPeriod = new LoanPeriod(learner, book, LocalDate.now(), LocalDate.now().plusDays(7), "BORROWED");
+        LoanPeriod loanPeriod = new LoanPeriod(learner, book, LocalDate.now(), LocalDate.now().plusDays(-1), "BORROWED");
 
         loanPeriodService.createLoanPeriod(loanPeriod);
         bookService.updateBook(book_id, book);

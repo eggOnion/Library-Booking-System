@@ -14,6 +14,8 @@ public interface BookService {
 
    Book updateBook(int id, Book book);
 
+   // Book borrowBook(int book_id, int learner_id);
+
    void deleteBook(int id);
 
    ArrayList<Book> searchBooks(String title);
