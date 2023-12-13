@@ -50,7 +50,7 @@ public class GlobalExceptionHandler {
         // logger.error(ex.getMessage(), ex);
 
         // return generic error message;
-        ErrorResponse errorResponse = new ErrorResponse("Something went wrong", LocalDateTime.now());
+        ErrorResponse errorResponse = new ErrorResponse("Something went wrong. Pls ensure the CRUD operation is correct", LocalDateTime.now());
         return new ResponseEntity<>(errorResponse, HttpStatus.INTERNAL_SERVER_ERROR);
     }
 

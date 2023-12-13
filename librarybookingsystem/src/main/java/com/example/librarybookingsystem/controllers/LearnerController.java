@@ -29,37 +29,37 @@ public class LearnerController {
     }
 
     @PostMapping(path={"","/"})
-    public ResponseEntity<Learner> createLearner(@Valid @RequestBody Learner user) {
-        Learner newUser = learnerService.createLearner(user);
-        return new ResponseEntity<>(newUser, HttpStatus.CREATED);
+    public ResponseEntity<Learner> createLearner(@Valid @RequestBody Learner learner) {
+        Learner newLearner = learnerService.createLearner(learner);
+        return new ResponseEntity<>(newLearner, HttpStatus.CREATED);
     }
 
     @GetMapping(path={"","/"})
-    public ResponseEntity<ArrayList<Learner>> getAllUsers() {
-        ArrayList<Learner> allUsers = learnerService.getAllLearners();
-        return new ResponseEntity<>(allUsers, HttpStatus.OK);
+    public ResponseEntity<ArrayList<Learner>> getAllLearners() {
+        ArrayList<Learner> allLearners = learnerService.getAllLearners();
+        return new ResponseEntity<>(allLearners, HttpStatus.OK);
     }
 
     @GetMapping(path = {"/{id}","/{id}/"})
-    public ResponseEntity<Learner> getUser(@PathVariable String id) {
-        Learner findUser = learnerService.getLearner(id);
-        return new ResponseEntity<>(findUser, HttpStatus.OK);
+    public ResponseEntity<Learner> getLearner(@PathVariable int id) {
+        Learner findLearner = learnerService.getLearner(id);
+        return new ResponseEntity<>(findLearner, HttpStatus.OK);
     }
 
-    @GetMapping(path={"/search","/search/"})
-    public ResponseEntity<ArrayList<Learner>> searchCustomers(@RequestParam String email) {
+    @GetMapping(path={"/search","/search/"})    //search?email=
+    public ResponseEntity<ArrayList<Learner>> searchLearners(@RequestParam String email) {
         ArrayList<Learner> foundLearner = learnerService.searchLearner(email);
         return new ResponseEntity<>(foundLearner, HttpStatus.OK);
     }
 
     @PutMapping(path = {"/{id}","/{id}/"})
-    public ResponseEntity<Learner> updateUser(@PathVariable String id, @Valid @RequestBody Learner user) {
-        Learner updateLearner = learnerService.updateLearner(id, user);
+    public ResponseEntity<Learner> updateLearner(@PathVariable int id, @Valid @RequestBody Learner learner) {
+        Learner updateLearner = learnerService.updateLearner(id, learner);
         return new ResponseEntity<>(updateLearner, HttpStatus.OK);
     }
 
     @DeleteMapping(path = {"/{id}","/{id}/"})
-    public ResponseEntity<Learner> deleteLearner(@PathVariable String id) {
+    public ResponseEntity<Learner> deleteLearner(@PathVariable int id) {
         learnerService.deleteLearner(id);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }

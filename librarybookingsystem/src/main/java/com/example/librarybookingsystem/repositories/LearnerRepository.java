@@ -7,8 +7,7 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 import com.example.librarybookingsystem.entities.Learner;
 
-
 @Repository
-public interface LearnerRepository extends JpaRepository<Learner, java.lang.String> {
+public interface LearnerRepository extends JpaRepository<Learner, Integer> {
     List<Learner> findByEmail(String email);    
 }

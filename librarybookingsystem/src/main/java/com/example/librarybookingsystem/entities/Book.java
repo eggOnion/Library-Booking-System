@@ -1,12 +1,16 @@
-package com.example.librarybookingsystem;
-import java.util.UUID; //added this import for UUID
+package com.example.librarybookingsystem.entities;
 
+import java.util.List;
+
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
+import jakarta.validation.constraints.Max;
 import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
@@ -22,16 +26,12 @@ import lombok.Setter;
 @Setter
 @Entity
 @Table(name = "book")
-
 public class Book {
     
     @Id
-
-    // @GeneratedValue(strategy = GenerationType.IDENTITY)
-    // dont use generatedvalue because using random UUID
-
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
-    private String id; //change from int to String
+    private int id;
 
     @NotBlank(message = "Title is mandatory")
     @Column(name = "title")
@@ -47,17 +47,19 @@ public class Book {
 
     @Column(name = "quantity")
     @Min(value = 0, message = "Quantity cannot be less than 0")
+    @Max(value = 5, message = "Quantity cannot be more than 5")
     @NotNull(message = "Quantity is mandatory")
     private int quantity;
 
     @Column(name = "availability")
     private boolean availability;
 
-    public Book() {
-        this.id = UUID.randomUUID().toString(); //id will be randomUUID
-    }
+    @OneToMany(mappedBy = "book", cascade = CascadeType.ALL)
+    private List<LoanPeriod> LoanPeriod;
 
-  
+    public Book() {
+
+    }
 
     public Book(String title, String author, String genre, int quantity, boolean availability) {
         this();

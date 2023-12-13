@@ -2,6 +2,7 @@ package com.example.librarybookingsystem.services;
 import java.util.ArrayList;
 
 import com.example.librarybookingsystem.entities.Learner;
+import com.example.librarybookingsystem.entities.Learner.LearnerBuilder;
 
 
 public interface LearnerService {
@@ -10,17 +11,14 @@ public interface LearnerService {
     
     Learner createLearner(Learner learner);
 
-    Learner getLearner(String id);
+    Learner getLearner(int id);
 
     ArrayList<Learner> getAllLearners();
 
-    Learner updateLearner(String id, Learner learner);
+    Learner updateLearner(int id, Learner learner);
 
-    void deleteLearner(String id);
+    void deleteLearner(int id);
 
-    ArrayList<Learner> searchLearner(String email);       //switch to search by username later
-    
+    ArrayList<Learner> searchLearner(String email); 
 }
-
-    
 

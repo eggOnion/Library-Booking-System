@@ -1,14 +1,20 @@
-package com.example.librarybookingsystem;
+package com.example.librarybookingsystem.serviceimpls;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.stereotype.Service;
 
+import com.example.librarybookingsystem.entities.Book;
+import com.example.librarybookingsystem.exceptions.BookNotFoundException;
+import com.example.librarybookingsystem.repositories.BookRepository;
+import com.example.librarybookingsystem.services.BookService;
+
 @Service
 public class BookServiceImpl implements BookService {
 
     private BookRepository bookRepository;
+
 
     public BookServiceImpl(BookRepository bookRepository) {
         this.bookRepository = bookRepository;
@@ -33,12 +39,12 @@ public class BookServiceImpl implements BookService {
     }
 
     @Override
-    public Book getBook(String id) {
+    public Book getBook(int id) {
         return bookRepository.findById(id).orElseThrow(() -> new BookNotFoundException(id));
     }
 
     @Override
-    public Book updateBook(String id, Book book) {
+    public Book updateBook(int id, Book book) {
         Book bookToUpdate = bookRepository.findById(id).get();
         bookToUpdate.setTitle(book.getTitle());
         bookToUpdate.setAuthor(book.getAuthor());
@@ -54,8 +60,20 @@ public class BookServiceImpl implements BookService {
         return bookRepository.save(bookToUpdate);
     }
 
+    // @Override
+    // public Book borrowBook(int book_id, int learner_id) {
+    //     Book bookToBorrow = bookRepository.findById(book_id).get();
+    //     Learner learnerThatBorrow = learnerRepository.findById(learner_id).get();
+
+    //     if(bookToBorrow != null && learnerThatBorrow != null) {
+    //         loanPeriod.setLearner(learnerThatBorrow);
+    //         loanPeriod.setBook(bookToBorrow);
+    //     }
+    //     return null;
+    // }
+
     @Override
-    public void deleteBook(String id) {
+    public void deleteBook(int id) {
         bookRepository.deleteById(id);
     }
 
