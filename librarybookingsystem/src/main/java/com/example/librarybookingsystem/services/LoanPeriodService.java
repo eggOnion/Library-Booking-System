@@ -2,6 +2,8 @@ package com.example.librarybookingsystem.services;
 
 import java.util.ArrayList;
 
+import com.example.librarybookingsystem.entities.Book;
+
 import com.example.librarybookingsystem.entities.LoanPeriod;
 
 public interface LoanPeriodService {

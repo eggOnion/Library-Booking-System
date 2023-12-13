@@ -23,6 +23,7 @@ import com.example.librarybookingsystem.services.LearnerService;
 import com.example.librarybookingsystem.services.LoanPeriodService;
 
 import io.micrometer.core.ipc.http.HttpSender.Response;
+
 import jakarta.validation.Valid;
 
 @RestController
@@ -70,7 +71,6 @@ public class LoanPeriodController {
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 
-    // Loan Book
     @PostMapping("/{learner_id}/{book_id}")
     public ResponseEntity<LoanPeriod> createLoanPeriod(@PathVariable int learner_id, @PathVariable int book_id) {
         Learner learner = learnerService.getLearner(learner_id);
@@ -94,7 +94,6 @@ public class LoanPeriodController {
         return new ResponseEntity<>(loanPeriod, HttpStatus.CREATED);
     }
 
-    // Return Book
     @PutMapping("/return/{id}")
     public ResponseEntity<LoanPeriod> returnBook(@PathVariable int id) {
         LoanPeriod loanPeriod = loanPeriodService.getLoanPeriod(id);
