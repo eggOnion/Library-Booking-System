@@ -45,7 +45,7 @@ public class BookController {
     }
     
     // Get specific book
-    @GetMapping(path = {"/{id}"})
+    @GetMapping(path = {"/{id}","/{id}/"})
     public ResponseEntity<Book> getBook(@PathVariable int id) {
         Book findBook = bookService.getBook(id);
         return new ResponseEntity<>(findBook, HttpStatus.OK);
@@ -59,7 +59,7 @@ public class BookController {
     }
 
     // Delete book
-    @DeleteMapping(path = { "", "/" })
+    @DeleteMapping(path = {"/{id}","/{id}/"})
     public ResponseEntity<Book> deleteBook(@PathVariable int id) {
         bookService.deleteBook(id);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
