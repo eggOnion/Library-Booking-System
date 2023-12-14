@@ -42,7 +42,7 @@ public class BookServiceImplTest {
         // 3. ASSERT
         assertEquals(book, savedBook, "The saved Book should be the same as the new Book.");
 
-        // also verify that the save method of the customer repository is called once only.
+        // also verify that the save method of book repository is called once only.
         verify(bookRepository, times(1)).save(book);
     }
     
