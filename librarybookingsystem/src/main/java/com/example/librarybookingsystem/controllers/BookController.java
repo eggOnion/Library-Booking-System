@@ -52,14 +52,14 @@ public class BookController {
     }
 
     // Update book
-    @PutMapping(path = {"/{id}"})
+    @PutMapping(path = { "", "/" })
     public ResponseEntity<Book> updateBook(@PathVariable int id, @RequestBody Book book) {
         Book updateBook = bookService.updateBook(id, book);
         return new ResponseEntity<>(updateBook, HttpStatus.OK);
     }
 
     // Delete book
-    @DeleteMapping(path = {"/{id}"})
+    @DeleteMapping(path = { "", "/" })
     public ResponseEntity<Book> deleteBook(@PathVariable int id) {
         bookService.deleteBook(id);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
