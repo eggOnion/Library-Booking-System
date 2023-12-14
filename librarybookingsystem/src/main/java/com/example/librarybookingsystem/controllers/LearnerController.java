@@ -28,13 +28,13 @@ public class LearnerController {
         this.learnerService = learnerService;
     }
 
-    @PostMapping(path={"","/"})
+    @PostMapping(path={""})
     public ResponseEntity<Learner> createLearner(@Valid @RequestBody Learner learner) {
         Learner newLearner = learnerService.createLearner(learner);
         return new ResponseEntity<>(newLearner, HttpStatus.CREATED);
     }
 
-    @GetMapping(path={"","/"})
+    @GetMapping(path={""})
     public ResponseEntity<ArrayList<Learner>> getAllLearners() {
         ArrayList<Learner> allLearners = learnerService.getAllLearners();
         return new ResponseEntity<>(allLearners, HttpStatus.OK);
