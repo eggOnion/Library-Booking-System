@@ -52,7 +52,7 @@ public class BookController {
     }
 
     // Update book
-    @PutMapping(path = { "", "/" })
+    @PutMapping(path = {"/{id}","/{id}/"})
     public ResponseEntity<Book> updateBook(@PathVariable int id, @RequestBody Book book) {
         Book updateBook = bookService.updateBook(id, book);
         return new ResponseEntity<>(updateBook, HttpStatus.OK);
