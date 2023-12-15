@@ -1,11 +1,18 @@
-package com.example.librarybookingsystem;
+package com.example.librarybookingsystem.entities;
 
+import java.util.List;
+
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
+import jakarta.validation.constraints.Max;
 import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
@@ -21,9 +28,8 @@ import lombok.Setter;
 @Setter
 @Entity
 @Table(name = "book")
-
 public class Book {
-    
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
@@ -43,11 +49,16 @@ public class Book {
 
     @Column(name = "quantity")
     @Min(value = 0, message = "Quantity cannot be less than 0")
+    @Max(value = 5, message = "Quantity cannot be more than 5")
     @NotNull(message = "Quantity is mandatory")
     private int quantity;
 
     @Column(name = "availability")
     private boolean availability;
+
+    @OneToMany(mappedBy = "book", cascade = CascadeType.ALL)
+    @JsonManagedReference(value = "book-loan")
+    private List<LoanPeriod> loanPeriods;
 
     public Book() {
 

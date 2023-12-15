@@ -1,0 +1,118 @@
+package com.example.librarybookingsystem.entities;
+
+import java.util.Collection;
+
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
+
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.Table;
+import jakarta.validation.constraints.Digits;
+import jakarta.validation.constraints.Email;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.Size;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.Setter;
+
+
+@Builder
+@AllArgsConstructor
+@Getter
+@Setter
+@Entity
+@Table(name="learner")
+public class Learner implements UserDetails {
+    
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id")
+    private int id;
+    private String username;
+    private String password;
+
+    // @NotBlank(message = "Username is mandatory")
+    // @Column(name = "username")
+    // private String title;
+
+    // @NotBlank(message = "password is mandatory")
+    // @Column(name = "password")
+    // private String password;
+
+    @NotBlank(message = "First name is mandatory")
+    @Column(name = "first_name")
+    private String firstName;
+
+    @NotBlank(message = "Last name is mandatory")
+    @Column(name = "last_name")
+    private String lastName;
+
+    @Email(message = "email should be a valid email address")
+    @Column(name = "email", unique = true)
+    private String email;
+
+    @Digits(fraction=0, integer = 9, message = "contact number cannot have alphabets")
+    @Column(name = "contact_num", nullable = false)
+    @Size(min=8, max=8, message = "contact number must have 8 digits")
+    private String contact_num;
+
+    public Learner() {
+        //parameterless constructor - Default Constructor
+    }
+
+    public Learner(String firstName, String lastName, String email, String contact_num){
+        this();
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.email = email;
+        this.contact_num = contact_num;
+    }
+
+    //From UserDetails
+    @Override
+    public Collection<? extends GrantedAuthority> getAuthorities() {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'getAuthorities'");
+    }
+
+    @Override
+    public String getPassword() {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'getPassword'");
+    }
+
+    @Override
+    public String getUsername() {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'getUsername'");
+    }
+
+    @Override
+    public boolean isAccountNonExpired() {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'isAccountNonExpired'");
+    }
+
+    @Override
+    public boolean isAccountNonLocked() {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'isAccountNonLocked'");
+    }
+
+    @Override
+    public boolean isCredentialsNonExpired() {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'isCredentialsNonExpired'");
+    }
+
+    @Override
+    public boolean isEnabled() {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'isEnabled'");
+    }    
+}
