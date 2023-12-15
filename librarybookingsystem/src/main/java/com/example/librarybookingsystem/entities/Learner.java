@@ -4,6 +4,8 @@ import java.util.List;
 
 import org.springframework.security.core.userdetails.UserDetails;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -28,9 +30,9 @@ import lombok.Setter;
 @Getter
 @Setter
 @Entity
-@Table(name="learner")
+@Table(name = "learner")
 public class Learner {
-    
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
@@ -53,28 +55,27 @@ public class Learner {
     private String lastName;
 
     @Email(message = "email should be a valid email address")
-    @Column(name = "email", unique = true)   
+    @Column(name = "email", unique = true)
     private String email;
 
-    @Digits(fraction=0, integer = 9, message = "contact number cannot have alphabets")
+    @Digits(fraction = 0, integer = 9, message = "contact number cannot have alphabets")
     @Column(name = "contact_num", nullable = false)
-    @Size(min=8, max=8, message = "contact number must have 8 digits")
+    @Size(min = 8, max = 8, message = "contact number must have 8 digits")
     private String contact_num;
 
+    @JsonManagedReference(value = "learner-loan")
     @OneToMany(mappedBy = "learner", cascade = CascadeType.ALL)
-    private List<LoanPeriod> LoanPeriod;
-
+    private List<LoanPeriod> loanPeriods;
 
     public Learner() {
-        //parameterless constructor - Default Constructor       
-    } 
+        // parameterless constructor - Default Constructor
+    }
 
-    public Learner(String firstName, String lastName, String email, String contact_num){
+    public Learner(String firstName, String lastName, String email, String contact_num) {
         this();
         this.firstName = firstName;
         this.lastName = lastName;
         this.email = email;
         this.contact_num = contact_num;
-    }    
+    }
 }
-

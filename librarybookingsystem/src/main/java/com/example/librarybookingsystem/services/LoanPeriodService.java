@@ -5,14 +5,16 @@ import java.util.ArrayList;
 import com.example.librarybookingsystem.entities.LoanPeriod;
 
 public interface LoanPeriodService {
-    
-    LoanPeriod createLoanPeriod(LoanPeriod loan);
+
+    LoanPeriod createLoanPeriod(int learner_id, int book_id);
 
     LoanPeriod getLoanPeriod(int id);
 
     ArrayList<LoanPeriod> getAllLoanPeriods();
 
     LoanPeriod updateLoanPeriod(int id, LoanPeriod loanPeriod);
+
+    LoanPeriod returnLoanPeriod(int id, LoanPeriod loanPeriod);
 
     void deleteLoanPeriod(int id);
 

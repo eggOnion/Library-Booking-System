@@ -31,14 +31,17 @@ public class LoanPeriod {
     @Column(name = "id")
     private int id;
 
-    @JsonBackReference
-    @ManyToOne(optional = false)
+    @JsonBackReference(value = "learner-loan")
+    @ManyToOne
     @JoinColumn(name = "learner_id", referencedColumnName = "id", nullable = false)
+    @JoinColumn(name = "learner_firstname", referencedColumnName = "first_name", nullable = false)
+    @JoinColumn(name = "learner_lastname", referencedColumnName = "last_name", nullable = false)
     private Learner learner;
 
-    @JsonBackReference
-    @ManyToOne(optional = false)
+    @JsonBackReference(value = "book-loan")
+    @ManyToOne
     @JoinColumn(name = "book_id", referencedColumnName = "id", nullable = false)
+    @JoinColumn(name = "book_title", referencedColumnName = "title", nullable = false)
     private Book book;
 
     @Column(name = "start_time")
