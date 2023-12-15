@@ -32,7 +32,7 @@ public class BookServiceImplTest {
         // 1. SETUP
         // Create a new Book
         
-        Book book = Book.builder().title("Learn Java in One Day").author("Jamie Chan").genre("Programming").quantity(5).availability(true).build();
+        Book book = Book.builder().id(1).title("Learn Java in One Day").author("Jamie Chan").genre("Programming").quantity(5).availability(true).build();
 
         // mock the save method of the Book repository
         when((bookRepository.save(book))).thenReturn(book);
@@ -51,7 +51,7 @@ public class BookServiceImplTest {
     public void getBookTest() {
         // 1. SETUP
         // Create a new Book
-        Book book = Book.builder().title("Learn Java in One Hour").author("Hou Siew, Lay").genre("Programming").quantity(5).availability(true).build();
+        Book book = Book.builder().title("Spring in Action").author("Craig Walls and Ryan Breidenbach").genre("Programming").quantity(5).availability(true).build();
 
         int bookId = 1;
 
