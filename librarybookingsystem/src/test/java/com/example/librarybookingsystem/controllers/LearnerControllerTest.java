@@ -60,26 +60,26 @@ public class LearnerControllerTest {
     }
 
 
-    // @DisplayName("Create a Learner")
-    // @Test
-    // @WithMockUser
-    // public void validLearnerCreationTest() throws Exception {
-    //     Learner learner = Learner.builder().firstName("Andy").lastName("Lee").email("andylee@rmail.com")
-    //     .contact_num("99225588").build();
+    @DisplayName("Create a Learner")
+    @Test
+    @WithMockUser
+    public void validLearnerCreationTest() throws Exception {
+        Learner learner = Learner.builder().firstName("Andy").lastName("Lee").email("andylee@email.com")
+        .contact_num("99225588").build();
 
-    //     String newLearnerkAsJSON = objectMapper.writeValueAsString(learner);
+        String newLearnerkAsJSON = objectMapper.writeValueAsString(learner);
 
-    //     RequestBuilder request = MockMvcRequestBuilders.post("/learners").contentType(MediaType.APPLICATION_JSON)
-    //     .content(newLearnerkAsJSON);
+        RequestBuilder request = MockMvcRequestBuilders.post("/learners").contentType(MediaType.APPLICATION_JSON)
+        .content(newLearnerkAsJSON);
 
-    //     mockMvc.perform(request)
-    //         .andExpect(status().isCreated())
-    //         .andExpect(content().contentType(MediaType.APPLICATION_JSON))
-    //         .andExpect(jsonPath("$.fistName").value("Andy"))
-    //         .andExpect(jsonPath("$.lastName").value("Lee"))
-    //         .andExpect(jsonPath("$.email").value("andylee@email.com"))
-    //         .andExpect(jsonPath("$.contact_num").value("99225588"));
+        mockMvc.perform(request)
+            .andExpect(status().isCreated())
+            .andExpect(content().contentType(MediaType.APPLICATION_JSON))
+            .andExpect(jsonPath("$.firstName").value("Andy"))
+            .andExpect(jsonPath("$.lastName").value("Lee"))
+            .andExpect(jsonPath("$.email").value("andylee@email.com"))
+            .andExpect(jsonPath("$.contact_num").value("99225588"));
 
-    // }
+    }
     
 }
