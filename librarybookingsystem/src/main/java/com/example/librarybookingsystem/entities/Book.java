@@ -2,6 +2,8 @@ package com.example.librarybookingsystem.entities;
 
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -27,7 +29,7 @@ import lombok.Setter;
 @Entity
 @Table(name = "book")
 public class Book {
-    
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
@@ -55,7 +57,8 @@ public class Book {
     private boolean availability;
 
     @OneToMany(mappedBy = "book", cascade = CascadeType.ALL)
-    private List<LoanPeriod> LoanPeriod;
+    @JsonManagedReference(value = "book-loan")
+    private List<LoanPeriod> loanPeriods;
 
     public Book() {
 

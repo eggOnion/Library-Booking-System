@@ -61,27 +61,27 @@ public class BookControllerTest {
 
 
     
-    // @DisplayName("Create a Book")
-    // @Test
-    // @WithMockUser
-    // public void validBookCreationTest() throws Exception {
-    //     Book book = Book.builder().title("Learn Java in One Day").author("Jamie Chan").genre("Programming")
-    //     .quantity(5).availability(true).build();
+    @DisplayName("Create a Book")
+    @Test
+    @WithMockUser
+    public void validBookCreationTest() throws Exception {
+        Book book = Book.builder().title("Learn Java in One Day").author("Jamie Chan").genre("Programming")
+        .quantity(5).availability(true).build();
 
-    //     String newBookAsJSON = objectMapper.writeValueAsString(book);
+        String newBookAsJSON = objectMapper.writeValueAsString(book);
 
-    //     RequestBuilder request = MockMvcRequestBuilders.post("/book").contentType(MediaType.APPLICATION_JSON)
-    //     .content(newBookAsJSON);
+        RequestBuilder request = MockMvcRequestBuilders.post("/book").contentType(MediaType.APPLICATION_JSON)
+        .content(newBookAsJSON);
 
-    //     mockMvc.perform(request)
-    //         .andExpect(status().isCreated())
-    //         .andExpect(content().contentType(MediaType.APPLICATION_JSON))
-    //         .andExpect(jsonPath("$.title").value("Learn Java in One Day"))
-    //         .andExpect(jsonPath("$.author").value("Jamie Chan"))
-    //         .andExpect(jsonPath("$.genre").value("Programming"))
-    //         .andExpect(jsonPath("$.quantity").value(5))
-    //         .andExpect(jsonPath("$.availability").value(true));
-    // }
+        mockMvc.perform(request)
+            .andExpect(status().isCreated())
+            .andExpect(content().contentType(MediaType.APPLICATION_JSON))
+            .andExpect(jsonPath("$.title").value("Learn Java in One Day"))
+            .andExpect(jsonPath("$.author").value("Jamie Chan"))
+            .andExpect(jsonPath("$.genre").value("Programming"))
+            .andExpect(jsonPath("$.quantity").value(5))
+            .andExpect(jsonPath("$.availability").value(true));
+    }
 
 
 }
