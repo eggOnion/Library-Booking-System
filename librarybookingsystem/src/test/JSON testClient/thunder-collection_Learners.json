@@ -19,10 +19,17 @@
             "params": [
                 {
                     "name": "id",
-                    "value": 2,
+                    "value": "",
                     "isPath": true
                 }
             ],
+            "auth": {
+                "type": "basic",
+                "basic": {
+                    "username": "user",
+                    "password": "password"
+                }
+            },
             "tests": []
         },
         {
@@ -71,6 +78,58 @@
                 }
             },            
             "tests": []
+        },        
+        {
+            "_id": "fa2313c9-47ef-492e-aca3-cac40dbb7ff2",
+            "colId": "6a515c7d-0c17-4af4-ab99-6b092cfd2f26",
+            "containerId": "",
+            "name": "My Nobody Learner",
+            "url": "http://localhost:8080/learners",
+            "method": "POST",
+            "sortNum": 40000,
+            "created": "2023-08-23T11:54:19.493Z",
+            "modified": "2023-11-16T12:22:13.732Z",
+            "headers": [],
+            "params": [],
+            "body": {
+                "type": "json",
+                "raw": "{\n  \"firstName\": \"\",\n  \"lastName\": \"\",\n  \"email\": \"mrnobody@continental.com\",\n  \"contact_num\": \"999a\"\n}",
+                "form": []
+            },
+            "auth": {
+                "type": "basic",
+                "basic": {
+                    "username": "user",
+                    "password": "password"
+                }
+            },            
+            "tests": []
+        },
+        {
+            "_id": "fa2313c9-47ef-492e-aca3-cac40dbb7ff2",
+            "colId": "6a515c7d-0c17-4af4-ab99-6b092cfd2f26",
+            "containerId": "",
+            "name": "Create Impersonator Learner",
+            "url": "http://localhost:8080/learners",
+            "method": "POST",
+            "sortNum": 40000,
+            "created": "2023-08-23T11:54:19.493Z",
+            "modified": "2023-11-16T12:22:13.732Z",
+            "headers": [],
+            "params": [],
+            "body": {
+                "type": "json",
+                "raw": "{\n  \"firstName\": \"John\",\n  \"lastName\": \"Smith\",\n  \"email\": \"johnwick@continental.com\",\n  \"contact_num\": \"93456789\"\n}",
+                "form": []
+            },
+            "auth": {
+                "type": "basic",
+                "basic": {
+                    "username": "user",
+                    "password": "password"
+                }
+            },            
+            "tests": []
         },
         {
             "_id": "37f74adc-79a4-46be-805f-ade43c28bc13",
@@ -86,7 +145,7 @@
             "params": [
                 {
                     "name": "id",
-                    "value": 2,
+                    "value": "",
                    "isPath": true
                 }
             ],
@@ -103,7 +162,7 @@
             "_id": "e0b4aad6-30ed-4dd1-81c4-57ffa515be9d",
             "colId": "6a515c7d-0c17-4af4-ab99-6b092cfd2f26",
             "containerId": "",
-            "name": "Update Learners",
+            "name": "Update Learner",
             "url": "http://localhost:8080/learners/{id}",
             "method": "PUT",
             "sortNum": 90000,
@@ -113,7 +172,7 @@
             "params": [
                 {
                     "name": "id",
-                    "value": 1,
+                    "value": "1",
                     "isPath": true
                 }
             ],
@@ -130,6 +189,6 @@
                 }
             },
             "tests": []
-        }
+        }     
     ]
 }
