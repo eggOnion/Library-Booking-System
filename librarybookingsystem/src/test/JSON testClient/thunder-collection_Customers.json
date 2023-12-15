@@ -1,0 +1,114 @@
+{
+    "client": "Thunder Client",
+    "collectionName": "Customers",
+    "dateExported": "2023-11-18T08:54:30.780Z",
+    "version": "1.1",
+    "folders": [],
+    "requests": [
+        {
+            "_id": "0251a07f-c9a3-4207-8c40-0910af280756",
+            "colId": "6a515c7d-0c17-4af4-ab99-6b092cfd2f26",
+            "containerId": "",
+            "name": "Get Customer By Id",
+            "url": "http://localhost:8080/customers/{id}",
+            "method": "GET",
+            "sortNum": 20000,
+            "created": "2023-08-23T11:54:08.396Z",
+            "modified": "2023-11-16T12:55:02.106Z",
+            "headers": [],
+            "params": [
+                {
+                    "name": "id",
+                    "value": "03850488-dc96-4d95-8db1-c36b1eb4a977",
+                    "isPath": true
+                }
+            ],
+            "tests": []
+        },
+        {
+            "_id": "9cbf761c-af3c-4463-9e78-9189e1aa699f",
+            "colId": "6a515c7d-0c17-4af4-ab99-6b092cfd2f26",
+            "containerId": "",
+            "name": "Get All Customers",
+            "url": "http://localhost:8080/customers/",
+            "method": "GET",
+            "sortNum": 30000,
+            "created": "2023-08-23T11:54:13.931Z",
+            "modified": "2023-11-18T02:36:22.609Z",
+            "headers": [],
+            "params": [],
+            "auth": {
+                "type": "basic",
+                "basic": {
+                    "username": "user",
+                    "password": "password"
+                }
+            },
+            "tests": []
+        },
+        {
+            "_id": "fa2313c9-47ef-492e-aca3-cac40dbb7ff2",
+            "colId": "6a515c7d-0c17-4af4-ab99-6b092cfd2f26",
+            "containerId": "",
+            "name": "Create Customer",
+            "url": "http://localhost:8080/customers",
+            "method": "POST",
+            "sortNum": 40000,
+            "created": "2023-08-23T11:54:19.493Z",
+            "modified": "2023-11-16T12:22:13.732Z",
+            "headers": [],
+            "params": [],
+            "body": {
+                "type": "json",
+                "raw": "{\n  \"firstName\": \"Bruce\",\n  \"lastName\": \"Banner\",\n  \"email\": \"bruce@avengers.com\",\n  \"contactNo\": \"12345678\",\n  \"jobTitle\": \"Scientist\",\n  \"yearOfBirth\": \"1975\"\n}",
+                "form": []
+            },
+            "tests": []
+        },
+        {
+            "_id": "37f74adc-79a4-46be-805f-ade43c28bc13",
+            "colId": "6a515c7d-0c17-4af4-ab99-6b092cfd2f26",
+            "containerId": "",
+            "name": "Delete Customer",
+            "url": "http://localhost:8080/customers/{id}",
+            "method": "DELETE",
+            "sortNum": 50000,
+            "created": "2023-08-23T11:55:06.311Z",
+            "modified": "2023-11-18T08:50:08.510Z",
+            "headers": [],
+            "params": [
+                {
+                    "name": "id",
+                    "value": "",
+                    "isPath": true
+                }
+            ],
+            "tests": []
+        },
+        {
+            "_id": "e0b4aad6-30ed-4dd1-81c4-57ffa515be9d",
+            "colId": "6a515c7d-0c17-4af4-ab99-6b092cfd2f26",
+            "containerId": "",
+            "name": "Update Customers",
+            "url": "http://localhost:8080/customers/{id}",
+            "method": "PUT",
+            "sortNum": 90000,
+            "created": "2023-11-16T12:48:53.883Z",
+            "modified": "2023-11-16T12:54:41.297Z",
+            "headers": [],
+            "params": [
+                {
+                    "name": "id",
+                    "value": "03850488-dc96-4d95-8db1-c36b1eb4a977",
+                    "isPath": true
+                }
+            ],
+            "body": {
+                "type": "json",
+                "raw": "{\n  \"firstName\": \"Bruce\",\n  \"lastName\": \"Banner\",\n  \"email\": \"bruce@avengers.com\",\n  \"contactNo\": \"12345678\",\n  \"jobTitle\": \"Scientist\",\n  \"yearOfBirth\": \"1975\"\n}",
+                "form": []
+            },
+            "tests": []
+        }
+    ]
+}
