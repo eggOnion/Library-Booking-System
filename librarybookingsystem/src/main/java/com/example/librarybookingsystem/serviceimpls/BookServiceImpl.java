@@ -2,6 +2,7 @@ package com.example.librarybookingsystem.serviceimpls;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.stereotype.Service;
 
@@ -37,24 +38,26 @@ public class BookServiceImpl implements BookService {
 
         if (!existingBooks.isEmpty()) {
             for (Book existingBook : existingBooks) {
-                int updatedQty = existingBook.getQuantity() + book.getQuantity();
-                existingBook.setQuantity(updatedQty);
+                if (existingBook.getAuthor().equals(book.getAuthor())
+                        && existingBook.getGenre().equals(book.getGenre())) {
+                    int updatedQty = existingBook.getQuantity() + book.getQuantity();
+                    existingBook.setQuantity(updatedQty);
 
-                if (updatedQty > 0) {
-                    existingBook.setAvailability(true);
+                    if (updatedQty > 0) {
+                        existingBook.setAvailability(true);
+                    }
+
+                    bookRepository.save(existingBook);
+                    return existingBook;
                 }
-
-                bookRepository.save(existingBook);
             }
-            return existingBooks.get(0);
-        } else {
-            if (book.getQuantity() > 0 ) {
-                book.setAvailability(true);
-            }
-
-            Book newBook = bookRepository.save(book);
-            return newBook;
         }
+        if (book.getQuantity() > 0) {
+            book.setAvailability(true);
+        }
+
+        Book newBook = bookRepository.save(book);
+        return newBook;
     }
 
     @Override
@@ -99,7 +102,12 @@ public class BookServiceImpl implements BookService {
 
     @Override
     public void deleteBook(int id) {
-        bookRepository.deleteById(id);
+        Optional<Book> bookOptional =bookRepository.findById(id);
+        if(bookOptional.isPresent()){
+            bookRepository.deleteById(id);
+        } else {
+            throw new BookNotFoundException(id);
+        }
     }
 
 }
