@@ -27,7 +27,8 @@ public class LoanPeriodServiceImpl implements LoanPeriodService {
     private LearnerService learnerService;
     private BookService bookService;
 
-    public LoanPeriodServiceImpl(LoanPeriodRepository loanPeriodRepository, LearnerService learnerService, BookService bookService) {
+    public LoanPeriodServiceImpl(LoanPeriodRepository loanPeriodRepository, LearnerService learnerService,
+            BookService bookService) {
         this.loanPeriodRepository = loanPeriodRepository;
         this.learnerService = learnerService;
         this.bookService = bookService;
@@ -48,7 +49,8 @@ public class LoanPeriodServiceImpl implements LoanPeriodService {
             return null;
         }
 
-        LoanPeriod loanPeriod = new LoanPeriod(learner, book, LocalDate.now(), LocalDate.now().plusDays(30),"BORROWED");
+        LoanPeriod loanPeriod = new LoanPeriod(learner, book, LocalDate.now(), LocalDate.now().plusDays(30),
+                "BORROWED");
 
         loanPeriodRepository.save(loanPeriod);
         bookService.updateBook(book_id, book);
@@ -68,14 +70,14 @@ public class LoanPeriodServiceImpl implements LoanPeriodService {
     }
 
     // for now this method will just update loanStatus to RETURNED
-    @Override
-    public LoanPeriod updateLoanPeriod(int id, LoanPeriod loanPeriod) {
+    // @Override
+    // public LoanPeriod updateLoanPeriod(int id, LoanPeriod loanPeriod) {
 
-        LoanPeriod loanPeriodToUpdate = loanPeriodRepository.findById(id).get();
-        loanPeriodToUpdate.setLoanStatus("RETURNED");
+    //     LoanPeriod loanPeriodToUpdate = loanPeriodRepository.findById(id).get();
+    //     loanPeriodToUpdate.setLoanStatus("RETURNED");
 
-        return loanPeriodRepository.save(loanPeriodToUpdate);
-    }
+    //     return loanPeriodRepository.save(loanPeriodToUpdate);
+    // }
 
     @Override
     public void deleteLoanPeriod(int id) {
@@ -89,22 +91,24 @@ public class LoanPeriodServiceImpl implements LoanPeriodService {
     }
 
     @Override
-    public LoanPeriod returnLoanPeriod(int id, LoanPeriod loanPeriod) {
-        if (LocalDate.now().isAfter(loanPeriod.getEndTime())) {
-            if (!loanPeriod.getLoanStatus().equals("RETURNED")) {
-                loanPeriod.setLoanStatus("OVERDUE");
-            }
-        } else if (loanPeriod.getLoanStatus().equals("BORROWED")) {
-            loanPeriod.setLoanStatus("RETURNED");
+    public LoanPeriod returnLoanPeriod(int id) {
+
+        LoanPeriod existingLoanPeriod = loanPeriodRepository.findById(id)
+                .orElseThrow(() -> new LoanPeriodNotFoundException(id));
+
+        if (LocalDate.now().isBefore(existingLoanPeriod.getEndTime())) {
+            existingLoanPeriod.setLoanStatus("RETURNED");
+        } else if (!existingLoanPeriod.getLoanStatus().equals("RETURNED")) {
+            existingLoanPeriod.setLoanStatus("OVERDUE");
         }
 
-        Book book = loanPeriod.getBook();
+        Book book = existingLoanPeriod.getBook();
         book.setQuantity(book.getQuantity() + 1);
 
-        updateLoanPeriod(id, loanPeriod);
+        loanPeriodRepository.save(existingLoanPeriod);
         bookService.updateBook(book.getId(), book);
 
-        return loanPeriod;
+        return existingLoanPeriod;
     }
 
 }
