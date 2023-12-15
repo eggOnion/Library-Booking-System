@@ -15,7 +15,6 @@ public class BookServiceImpl implements BookService {
 
     private BookRepository bookRepository;
 
-
     public BookServiceImpl(BookRepository bookRepository) {
         this.bookRepository = bookRepository;
     }
@@ -26,10 +25,36 @@ public class BookServiceImpl implements BookService {
         return (ArrayList<Book>) findBooks;
     }
 
+    // @Override
+    // public Book createBook(Book book) {
+    // Book newBook = bookRepository.save(book);
+    // return newBook;
+    // }
+
     @Override
     public Book createBook(Book book) {
-        Book newBook = bookRepository.save(book);
-        return newBook;
+        List<Book> existingBooks = bookRepository.findByTitle(book.getTitle());
+
+        if (!existingBooks.isEmpty()) {
+            for (Book existingBook : existingBooks) {
+                int updatedQty = existingBook.getQuantity() + book.getQuantity();
+                existingBook.setQuantity(updatedQty);
+
+                if (updatedQty > 0) {
+                    existingBook.setAvailability(true);
+                }
+
+                bookRepository.save(existingBook);
+            }
+            return existingBooks.get(0);
+        } else {
+            if (book.getQuantity() > 0 ) {
+                book.setAvailability(true);
+            }
+
+            Book newBook = bookRepository.save(book);
+            return newBook;
+        }
     }
 
     @Override
@@ -62,14 +87,14 @@ public class BookServiceImpl implements BookService {
 
     // @Override
     // public Book borrowBook(int book_id, int learner_id) {
-    //     Book bookToBorrow = bookRepository.findById(book_id).get();
-    //     Learner learnerThatBorrow = learnerRepository.findById(learner_id).get();
+    // Book bookToBorrow = bookRepository.findById(book_id).get();
+    // Learner learnerThatBorrow = learnerRepository.findById(learner_id).get();
 
-    //     if(bookToBorrow != null && learnerThatBorrow != null) {
-    //         loanPeriod.setLearner(learnerThatBorrow);
-    //         loanPeriod.setBook(bookToBorrow);
-    //     }
-    //     return null;
+    // if(bookToBorrow != null && learnerThatBorrow != null) {
+    // loanPeriod.setLearner(learnerThatBorrow);
+    // loanPeriod.setBook(bookToBorrow);
+    // }
+    // return null;
     // }
 
     @Override

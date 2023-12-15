@@ -40,11 +40,11 @@ public class LoanPeriodController {
         this.bookService = bookService;
     }
 
-    @PostMapping(path = { "", "/" })
-    public ResponseEntity<LoanPeriod> createLoanPeriod(@Valid @RequestBody LoanPeriod loanPeriod) {
-        LoanPeriod newLoanPeriod = loanPeriodService.createLoanPeriod(loanPeriod);
-        return new ResponseEntity<>(newLoanPeriod, HttpStatus.OK);
-    }
+    // @PostMapping(path = { "", "/" })
+    // public ResponseEntity<LoanPeriod> createLoanPeriod(@Valid @RequestBody LoanPeriod loanPeriod) {
+    //     LoanPeriod newLoanPeriod = loanPeriodService.createLoanPeriod(loanPeriod);
+    //     return new ResponseEntity<>(newLoanPeriod, HttpStatus.OK);
+    // }
 
     @GetMapping(path = { "", "/" })
     public ResponseEntity<ArrayList<LoanPeriod>> getAllLoanPeriods() {
@@ -72,57 +72,18 @@ public class LoanPeriodController {
 
     @PostMapping("/{learner_id}/{book_id}")
     public ResponseEntity<LoanPeriod> createLoanPeriod(@PathVariable int learner_id, @PathVariable int book_id) {
-        Learner learner = learnerService.getLearner(learner_id);
-        Book book = bookService.getBook(book_id);
-
-        if (learner == null || book == null) {
-            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-        }
-
-        if (book.getQuantity() > 0) {
-            book.setQuantity(book.getQuantity() - 1);
-        } else {
-            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
-        }
-
-        LoanPeriod loanPeriod = new LoanPeriod(learner, book, LocalDate.now(), LocalDate.now().plusDays(-1), "BORROWED");
-
-        loanPeriodService.createLoanPeriod(loanPeriod);
-        bookService.updateBook(book_id, book);
-
-        return new ResponseEntity<>(loanPeriod, HttpStatus.CREATED);
+        LoanPeriod createLoanPeriod = loanPeriodService.createLoanPeriod(learner_id, book_id);
+        return new ResponseEntity<>(createLoanPeriod, HttpStatus.OK);
     }
 
     @PutMapping("/return/{id}")
-    public ResponseEntity<LoanPeriod> returnBook(@PathVariable int id) {
-        LoanPeriod loanPeriod = loanPeriodService.getLoanPeriod(id);
+    public ResponseEntity<LoanPeriod> returnLoanPeriod(@PathVariable int id, @RequestBody LoanPeriod loanPeriod) {
+        LoanPeriod returnLoanPeriod = loanPeriodService.getLoanPeriod(id);
 
-        if (loanPeriod == null) {
+        if (returnLoanPeriod == null) {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
+        return new ResponseEntity<>(returnLoanPeriod, HttpStatus.ACCEPTED);
 
-        if (LocalDate.now().isAfter(loanPeriod.getEndTime())) {
-            if (!loanPeriod.getLoanStatus().equals("RETURNED")) {
-                loanPeriod.setLoanStatus("OVERDUE");
-            }
-        } else if (loanPeriod.getLoanStatus().equals("BORROWED")) {
-            loanPeriod.setLoanStatus("RETURNED");
-        } else {
-            return new ResponseEntity<>(HttpStatus.CONFLICT);
-        }
-
-        Book book = loanPeriod.getBook();
-        book.setQuantity(book.getQuantity() + 1);
-
-        loanPeriodService.updateLoanPeriod(id, loanPeriod);
-        bookService.updateBook(book.getId(), book);
-
-        return new ResponseEntity<>(HttpStatus.ACCEPTED);
     }
-
-    // @PostMapping(path={"/user_id/"})
-    // public ResponseEntity someMethod(@PathVariable int user_id @PathVariable int
-    // book_id) {
-
-    // }
 }
