@@ -22,6 +22,7 @@ import com.example.librarybookingsystem.entities.LoanPeriod;
 import com.example.librarybookingsystem.repositories.BookRepository;
 import com.example.librarybookingsystem.repositories.LearnerRepository;
 import com.example.librarybookingsystem.repositories.LoanPeriodRepository;
+import com.example.librarybookingsystem.services.LoanPeriodService;
 
 @SpringBootTest
 public class LoanPeriodServiceImplTest  {
@@ -61,11 +62,19 @@ public class LoanPeriodServiceImplTest  {
         Book book = Book.builder().id(1).title("Learn Java in One Day").author("Jamie Chan").genre("Programming")
                 .quantity(1).availability(true).build();
 
-        when((learnerRepository.save(learner))).thenReturn(learner);
-        when((bookRepository.save(book))).thenReturn(book);
+        // when((learnerRepository.save(learner))).thenReturn(learner);
+        // when((bookRepository.save(book))).thenReturn(book);
 
-        Learner savedLearner = learnerService.createLearner(learner);
-        Book savedBook = bookService.createBook(book);
+        // Learner savedLearner = learnerService.createLearner(learner);
+        // Book savedBook = bookService.createBook(book);
+
+        int learnerId = 1;
+        when(learnerRepository.findById(learnerId)).thenReturn(Optional.of(learner));
+        Learner retrievedLearner = learnerService.getLearner(learnerId);
+
+        int bookId = 1;
+        when(bookRepository.findById(bookId)).thenReturn(Optional.of(book));
+        Book retrievedBook = bookService.getBook(bookId);
 
         // assertEquals(learner, savedLearner, "Learner OK.");
         // assertEquals(book, savedBook, "Book OK.");
@@ -90,12 +99,13 @@ public class LoanPeriodServiceImplTest  {
         // // 2. EXECUTE
 
         //using local class
-        LoanPeriod loanPeriod = createLoanPeriod(savedLearner, savedBook, LocalDate.now(), LocalDate.now().plusDays(30), "BORROWED");
+        LoanPeriod loanPeriod = createLoanPeriod(retrievedLearner, retrievedBook, LocalDate.now(), LocalDate.now().plusDays(30), "BORROWED");
         
 
         // LoanPeriod com.example.librarybookingsystem.serviceimpls.LoanPeriodServiceImpl.createLoanPeriod(int learner_id, int book_id)
         //LoanPeriodServiceImpl.createLoanPeriod expecting (int learner_id, int book_id) 
-        // LoanPeriod loanPeriod = loanPeriodService.createLoanPeriod(savedLearner, savedBook, LocalDate.now(), LocalDate.now().plusDays(30), "BORROWED");
+        // LoanPeriod loanPeriod = LoanPeriodService.createLoanPeriod(retrievedLearner, retrievedBook, LocalDate.now(), LocalDate.now().plusDays(30), "BORROWED");
+        
         
         when(loanPeriodRepository.save(loanPeriod)).thenReturn(loanPeriod);
 
