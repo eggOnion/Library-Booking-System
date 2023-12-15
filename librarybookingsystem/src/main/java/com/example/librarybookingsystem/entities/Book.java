@@ -58,7 +58,7 @@ public class Book {
 
     @OneToMany(mappedBy = "book", cascade = CascadeType.ALL)
     @JsonManagedReference(value = "book-loan")
-    private List<LoanPeriod> loanPeriods;
+    private List<LoanPeriod> loanPeriod;
 
     public Book() {
 
