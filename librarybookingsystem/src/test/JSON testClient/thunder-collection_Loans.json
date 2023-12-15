@@ -54,6 +54,65 @@
             "tests": []
         },
         {
+            "_id": "fa2313c9-47ef-492e-aca3-cac40dbb7ff2",
+            "colId": "6a515c7d-0c17-4af4-ab99-6b092cfd2f26",
+            "containerId": "",
+            "name": "Borrowing Book",
+            "url": "http://localhost:8080/loans/{id}/{id}",
+            "method": "POST",
+            "sortNum": 40000,
+            "created": "2023-08-23T11:54:19.493Z",
+            "modified": "2023-11-16T12:22:13.732Z",
+            "headers": [],
+            "params": [
+                {
+                    "name": "id",
+                    "value": "",
+                   "isPath": true
+                },
+                {
+                    "name": "id",
+                    "value": "",
+                   "isPath": true
+                }
+            ],
+            "auth": {
+                "type": "basic",
+                "basic": {
+                    "username": "user",
+                    "password": "password"
+                }
+            },            
+            "tests": []
+        },
+        {
+            "_id": "e0b4aad6-30ed-4dd1-81c4-57ffa515be9d",
+            "colId": "6a515c7d-0c17-4af4-ab99-6b092cfd2f26",
+            "containerId": "",
+            "name": "Returning a Book",
+            "url": "http://localhost:8080/loans/return/{id}",
+            "method": "PUT",
+            "sortNum": 90000,
+            "created": "2023-11-16T12:48:53.883Z",
+            "modified": "2023-11-16T12:54:41.297Z",
+            "headers": [],
+            "params": [
+                {
+                    "name": "id",
+                    "value": "",
+                    "isPath": true
+                }
+            ],           
+            "auth": {
+                "type": "basic",
+                "basic": {
+                    "username": "user",
+                    "password": "password"
+                }
+            },
+            "tests": []
+        },     
+        {
             "_id": "37f74adc-79a4-46be-805f-ade43c28bc13",
             "colId": "6a515c7d-0c17-4af4-ab99-6b092cfd2f26",
             "containerId": "",
