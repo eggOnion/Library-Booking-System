@@ -65,7 +65,7 @@ public class Learner {
 
     @JsonManagedReference(value = "learner-loan")
     @OneToMany(mappedBy = "learner", cascade = CascadeType.ALL)
-    private List<LoanPeriod> loanPeriods;
+    private List<LoanPeriod> loanPeriod;
 
     public Learner() {
         // parameterless constructor - Default Constructor

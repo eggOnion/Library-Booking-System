@@ -12,9 +12,9 @@ public interface LoanPeriodService {
 
     ArrayList<LoanPeriod> getAllLoanPeriods();
 
-    LoanPeriod updateLoanPeriod(int id, LoanPeriod loanPeriod);
+    // LoanPeriod updateLoanPeriod(int id, LoanPeriod loanPeriod);
 
-    LoanPeriod returnLoanPeriod(int id, LoanPeriod loanPeriod);
+    LoanPeriod returnLoanPeriod(int id);
 
     void deleteLoanPeriod(int id);
 

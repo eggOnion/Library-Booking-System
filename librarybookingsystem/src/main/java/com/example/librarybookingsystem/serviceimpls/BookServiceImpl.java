@@ -2,6 +2,7 @@ package com.example.librarybookingsystem.serviceimpls;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.stereotype.Service;
 
@@ -101,7 +102,12 @@ public class BookServiceImpl implements BookService {
 
     @Override
     public void deleteBook(int id) {
-        bookRepository.deleteById(id);
+        Optional<Book> bookOptional =bookRepository.findById(id);
+        if(bookOptional.isPresent()){
+            bookRepository.deleteById(id);
+        } else {
+            throw new BookNotFoundException(id);
+        }
     }
 
 }

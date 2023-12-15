@@ -58,11 +58,11 @@ public class LoanPeriodController {
         return new ResponseEntity<>(findLoanPeriod, HttpStatus.OK);
     }
 
-    @PutMapping(path = { "/{id}", "/{id}/" })
-    public ResponseEntity<LoanPeriod> updateLoanPeriod(@PathVariable int id, @RequestBody LoanPeriod loanPeriod) {
-        LoanPeriod updateLoanPeriod = loanPeriodService.updateLoanPeriod(id, loanPeriod);
-        return new ResponseEntity<>(updateLoanPeriod, HttpStatus.OK);
-    }
+    // @PutMapping(path = { "/{id}", "/{id}/" })
+    // public ResponseEntity<LoanPeriod> updateLoanPeriod(@PathVariable int id, @RequestBody LoanPeriod loanPeriod) {
+    //     LoanPeriod updateLoanPeriod = loanPeriodService.updateLoanPeriod(id, loanPeriod);
+    //     return new ResponseEntity<>(updateLoanPeriod, HttpStatus.OK);
+    // }
 
     @DeleteMapping(path = { "/{id}", "/{id}/" })
     public ResponseEntity<LoanPeriod> deleteLoanPeriod(@PathVariable int id) {
@@ -77,13 +77,13 @@ public class LoanPeriodController {
     }
 
     @PutMapping("/return/{id}")
-    public ResponseEntity<LoanPeriod> returnLoanPeriod(@PathVariable int id, @RequestBody LoanPeriod loanPeriod) {
-        LoanPeriod returnLoanPeriod = loanPeriodService.getLoanPeriod(id);
+    public ResponseEntity<LoanPeriod> returnLoanPeriod(@PathVariable int id) {
+        LoanPeriod returnedLoanPeriod = loanPeriodService.returnLoanPeriod(id);
 
-        if (returnLoanPeriod == null) {
+        if (returnedLoanPeriod == null) {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
-        return new ResponseEntity<>(returnLoanPeriod, HttpStatus.ACCEPTED);
+        return new ResponseEntity<>(loanPeriodService.getLoanPeriod(id), HttpStatus.ACCEPTED);
 
     }
-}
+}   
