@@ -38,14 +38,14 @@ public class LoanPeriod {
     @JsonBackReference(value = "learner-loan")
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "learner_id", referencedColumnName = "id", nullable = false)
-    @JoinColumn(name = "learner_firstname", referencedColumnName = "first_name", nullable = false)
-    @JoinColumn(name = "learner_lastname", referencedColumnName = "last_name", nullable = false)
+    // @JoinColumn(name = "learner_firstname", referencedColumnName = "first_name", nullable = false)
+    // @JoinColumn(name = "learner_lastname", referencedColumnName = "last_name", nullable = false)
     private Learner learner;
 
     @JsonBackReference(value = "book-loan")
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "book_id", referencedColumnName = "id", nullable = false)
-    @JoinColumn(name = "book_title", referencedColumnName = "title", nullable = false)
+    // @JoinColumn(name = "book_title", referencedColumnName = "title", nullable = false)
     private Book book;
 
     @Column(name = "start_time")
